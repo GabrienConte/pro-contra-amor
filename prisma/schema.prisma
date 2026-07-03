@@ -1,0 +1,20 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+}
+
+model Card {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  type        Type
+  createdAt   DateTime @default(now())
+}
+
+enum Type {
+  PRO
+  CON
+}
