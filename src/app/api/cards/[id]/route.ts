@@ -3,8 +3,10 @@ import { prisma } from "@/lib/prisma";
 
 export async function DELETE(
   _request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  await prisma.card.delete({ where: { id: params.id } });
+  const { id } = await params;
+
+  await prisma.card.delete({ where: { id } });
   return NextResponse.json({ success: true });
 }
